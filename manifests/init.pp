@@ -41,6 +41,12 @@ class fail2ban (
   $ssh_retry                = 3,
   $sshdos_retry             = 3,
   $dropbear_retry           = 3,
+
+  $logtarget                = '/var/log/fail2ban.log',
+  $socket                   = '/var/run/fail2ban/fail2ban.sock',
+  $pidfile                  = '/var/run/fail2ban/fail2ban.pid',
+  $failconf_path            = undef,
+
 ) inherits ::fail2ban::params {
   validate_re($package_ensure, '^(absent|latest|present|purged)$')
   validate_string($package_name)
