@@ -17,21 +17,21 @@ class fail2ban::config {
     }
   }
 
-  #  if $::fail2ban::config_file_path {
-  #  file { 'fail2ban.conf':
-  #    ensure  => $::fail2ban::config_file_ensure,
-  #    path    => $::fail2ban::config_file_path,
-  #    owner   => $::fail2ban::config_file_owner,
-  #    group   => $::fail2ban::config_file_group,
-  #   mode    => $::fail2ban::config_file_mode,
-  #    source  => $::fail2ban::config_file_source,
-  #    content => $::fail2ban::config_file_content,
-  #    notify  => $::fail2ban::config_file_notify,
-  #    require => $::fail2ban::config_file_require,
-  #  }
-  #}
+  if $::fail2ban::config_file_path {
+    file { 'fail2ban.conf':
+      ensure  => $::fail2ban::config_file_ensure,
+      path    => $::fail2ban::config_file_path,
+      owner   => $::fail2ban::config_file_owner,
+      group   => $::fail2ban::config_file_group,
+      mode    => $::fail2ban::config_file_mode,
+      source  => $::fail2ban::config_file_source,
+      content => $::fail2ban::config_file_content,
+      notify  => $::fail2ban::config_file_notify,
+      require => $::fail2ban::config_file_require,
+    }
+  }
 
-  file { "fail2ban.conf":
+  file { "real_fail2ban.conf":
     ensure  => file,
     path    => "/etc/fail2ban/fail2ban.conf",
     content => template($::fail2ban::failconf_path),
